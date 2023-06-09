@@ -1,0 +1,30 @@
+Problem Link: https://www.codingninjas.com/codestudio/problems/next-permutation_8230741?challengeSlug=striver-sde-challenge
+
+#include <bits/stdc++.h> 
+
+vector<int> nextPermutation(vector<int> &permutation, int n)
+{
+    int brkPnt = -1;
+    for (int i=n-2; i>=0; i--){
+        if (permutation[i] < permutation[i+1]){
+            brkPnt = i;
+            break;
+        }
+    }
+
+    if (brkPnt == -1) {
+        reverse(permutation.begin(), permutation.end());
+        return permutation;
+    }
+
+    // find next greater element
+    for (int i=n-1; i>brkPnt; i--){
+        if (permutation[i] > permutation[brkPnt]){
+            swap(permutation[i], permutation[brkPnt]);
+            break;
+        }
+    }
+
+    sort(permutation.begin()+brkPnt+1, permutation.end());
+    return permutation;
+}
