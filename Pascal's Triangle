@@ -1,0 +1,30 @@
+
+Problem Link: https://www.codingninjas.com/codestudio/problems/pascal-s-triangle_8230805?challengeSlug=striver-sde-challenge
+
+#include <bits/stdc++.h>
+
+vector<long long> generateRow(int r){
+  vector<long long> row;
+  row.push_back(1);
+
+  long long perm = 1;
+  long long i=r-1, j = 1;
+  while (i>0){
+    perm = (perm*i)/j;
+    row.push_back(perm);
+    i--;
+    j++;
+  }
+  return row;
+}
+
+
+vector<vector<long long int>> printPascal(int n) 
+{
+  vector<vector<long long>> tri;
+  for (int i=1; i<=n; i++){
+    tri.push_back(generateRow(i));
+  }
+
+  return tri;
+}
