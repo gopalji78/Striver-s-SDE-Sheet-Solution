@@ -1,0 +1,16 @@
+Problem Link: https://www.codingninjas.com/codestudio/problems/maximum-subarray-sum_8230694?challengeSlug=striver-sde-challenge
+
+#include <bits/stdc++.h> 
+long long maxSubarraySum(int arr[], int n)
+{
+    long long maxSum = 0;
+    long long sum = 0;
+    for (int i=0; i<n; i++){
+        sum+=arr[i];
+        maxSum = max(maxSum, sum);
+
+        if (sum < 0) sum = 0;
+    }
+    // if (maxSum<0) return 0;
+    return maxSum;
+}
