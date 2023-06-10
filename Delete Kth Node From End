@@ -1,0 +1,50 @@
+Problem Link: https://www.codingninjas.com/codestudio/problems/delete-kth-node-from-end_8230725?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+/*
+Following is the class structure of the Node class:
+
+class Node
+{
+public:
+    int data;
+    Node *next;
+    Node()
+    {
+        this->data = 0;
+        next = NULL;
+    }
+    Node(int data)
+    {
+        this->data = data; 
+        this->next = NULL;
+    }
+    Node(int data, Node* next)
+    {
+        this->data = data;
+        this->next = next;
+    }
+};
+*/
+
+Node* removeKthNode(Node* head, int K)
+{
+    Node* temp = head;
+    int len = 0;
+    while (temp != NULL){
+        temp = temp->next;
+        len++;
+    }
+
+    if (K == len) return head->next;
+    Node* first = head;
+    Node* second = head;
+
+    for (int i=0; i<K; i++) first = first->next;
+
+    while (first->next != NULL){
+        first = first->next;
+        second = second->next;
+    }
+    second->next = second->next->next;
+    return head;
+}
