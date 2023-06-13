@@ -1,0 +1,31 @@
+Problem Link: https://www.codingninjas.com/codestudio/problems/subsets-ii_8230855?challengeSlug=striver-sde-challenge&leftPanelTab=1
+
+#include <bits/stdc++.h> 
+void solver(int index, vector<int> arr, vector<int>& temp, vector<vector<int>>& ans) {
+    
+    ans.push_back(temp);
+    if (index == arr.size()) return;
+
+    for (int i=index; i<arr.size(); i++) {
+        if (i>index && arr[i] == arr[i-1]) continue;
+
+        temp.push_back(arr[i]);
+        solver(i+1, arr, temp, ans);
+        temp.pop_back();
+    }
+}
+
+
+vector<vector<int>> uniqueSubsets(int n, vector<int> &arr)
+{
+
+    if (arr.size() == 0) return {};
+    sort(arr.begin(), arr.end());
+    vector<vector<int>> ans;
+    vector<int> temp;
+    solver(0, arr, temp, ans);
+    return ans;
+}
+
+
+
