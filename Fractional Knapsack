@@ -1,0 +1,24 @@
+Problem Link: https://www.codingninjas.com/codestudio/problems/fractional-knapsack_8230767?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+#include <bits/stdc++.h> 
+bool comp(pair<int, int> item1, pair<int, int> item2) {
+    double rate1 = (double) item1.second / (double) item1.first;
+    double rate2 = (double) item2.second / (double) item2.first;
+
+    return rate1>rate2;
+}
+double maximumValue (vector<pair<int, int>>& items, int n, int w)
+{
+    sort(items.begin(), items.end(), comp);
+    double profit = 0;
+    for (int i=0; i<n; i++) {
+        if (items[i].first <= w) {
+            w-=items[i].first;
+            profit+=items[i].second;
+        }else {
+            profit+=(((double) items[i].second / (double) items[i].first )* (double) w);
+            break;
+        }
+    }
+    return profit;
+}
