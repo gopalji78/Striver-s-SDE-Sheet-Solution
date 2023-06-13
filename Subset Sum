@@ -1,0 +1,21 @@
+Problem Link: https://www.codingninjas.com/codestudio/problems/subset-sum_8230859?challengeSlug=striver-sde-challenge
+
+#include <bits/stdc++.h> 
+void solver(int index, vector<int>& ans, vector<int> &num, int sum) {
+    if (index == num.size()) return;
+
+    solver(index+1, ans, num, sum);
+    sum+=num[index];
+    ans.push_back(sum);
+    solver(index+1, ans, num, sum);
+}
+vector<int> subsetSum(vector<int> &num)
+{
+    if (num.size() == 0) return {};
+
+    vector<int> ans;
+    ans.push_back(0);
+    solver(0, ans, num, 0);
+    sort(ans.begin(), ans.end());
+    return ans;
+}
