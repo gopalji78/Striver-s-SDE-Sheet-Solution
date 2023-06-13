@@ -1,0 +1,23 @@
+Problem Link: https://www.codingninjas.com/codestudio/problems/combination-sum-ii_8230820?challengeSlug=striver-sde-challenge
+
+void solver(int index, vector<vector<int>> &ans, vector<int> &temp, vector<int> arr, int sum, int k) {
+    if (index == arr.size()) {
+        if (sum == k) ans.push_back(temp);
+        return;
+    }
+
+    solver(index+1, ans, temp, arr, sum, k);
+    temp.push_back(arr[index]);
+    solver(index+1, ans, temp, arr, sum+arr[index], k);
+    temp.pop_back();
+}
+
+vector<vector<int>> findSubsetsThatSumToK(vector<int> arr, int n, int k)
+{
+ 
+    vector<vector<int>> ans;
+    vector<int> temp;
+    solver(0, ans, temp, arr, 0, k);
+    return ans;
+}
+
