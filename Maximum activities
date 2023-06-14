@@ -1,0 +1,30 @@
+Problem Link: https://www.codingninjas.com/codestudio/problems/maximum-activities_8230800?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+#include "bits/stdc++.h"
+bool comp(pair<int, int> p1, pair<int, int> p2) {
+    return p1.second < p2.second ? true: false;
+}
+
+int maximumActivities(vector<int> &start, vector<int> &finish) {
+    vector<pair<int, int>> activity;
+    int n = start.size();
+
+    for (int i=0; i<n; i++) {
+        activity.push_back({start[i], finish[i]});
+    }
+
+    sort(activity.begin(), activity.end(), comp);
+
+    int finishTime = activity[0].second;
+    int activitiesDone = 1;
+
+    for (int i=1; i<n; i++) {
+        if (activity[i].first >= finishTime) {
+            finishTime = activity[i].second;
+            activitiesDone++;
+        }
+    }
+
+    return activitiesDone;
+
+}
