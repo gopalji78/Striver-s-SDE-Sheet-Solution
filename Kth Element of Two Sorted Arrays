@@ -1,0 +1,21 @@
+Problem Link: https://www.codingninjas.com/codestudio/problems/kth-element-of-two-sorted-arrays_8230824?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+int ninjaAndLadoos(vector<int> &row1, vector<int> &row2, int m, int n, int k) {
+    int i=0, j=0;
+
+    while (i<m && j<n) {
+        k--;
+        if (row1[i] < row2[j]) {
+            if (k==0) return row1[i];
+            i++;
+        }
+        else {
+            if (k==0) return row2[j];
+            j++;
+        }
+    }
+
+    if (i<m) return row1[i+k-1];
+
+    if (j<n) return row2[j+k-1];
+}
