@@ -1,0 +1,32 @@
+Problem Link: https://www.codingninjas.com/codestudio/problems/matrix-median_8230735?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+#include <bits/stdc++.h>
+int getMedian(vector<vector<int>> &matrix)
+{
+    int n = matrix.size();
+    int m = matrix[0].size();
+    priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>,
+    greater<pair<int, pair<int, int>>>> pq;
+
+    int m1 = 0, m2 = 0;
+    int total_ele = (n*m)/2;
+    for (int i=0; i<n; i++) {
+        pq.push({matrix[i][0], {i, 0}});
+    }
+
+    for (int i=0; i<=total_ele; i++) {
+        m2 = m1;
+        auto it = pq.top();
+        pq.pop();
+        int ele = it.first;
+        int r = it.second.first;
+        int c = it.second.second;
+        m1 = ele;
+        c++;
+        if (c<m) {
+            pq.push({matrix[r][c], {r, c}});
+        }
+    }
+
+    return m1;
+}
