@@ -1,0 +1,63 @@
+Problem Link: https://www.codingninjas.com/codestudio/problems/stack-using-queue_8230715?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+#include <bits/stdc++.h> 
+class Stack {
+    private:
+        queue<int> q1;
+        queue<int> q2;
+
+
+   public:
+    Stack() {
+        
+    }
+
+    /*----------------- Public Functions of Stack -----------------*/
+
+    int getSize() {
+        return q1.size();
+    }
+
+    bool isEmpty() {
+        return q1.empty();
+    }
+
+    void push(int element) {
+        q1.push(element);
+    }
+
+    int pop() {
+        if (q1.size() == 0) return -1;
+        while (q1.size() != 1) {
+            q2.push(q1.front());
+            q1.pop();
+        }
+
+        int val = q1.front();
+        q1.pop();
+
+        while (!q2.empty()) {
+            q1.push(q2.front());
+            q2.pop();
+        }
+        return val;
+    }
+
+    int top() {
+        if (q1.size() == 0) return -1;
+        while (q1.size() != 1) {
+            q2.push(q1.front());
+            q1.pop();
+        }
+
+        int val = q1.front();
+        q1.pop();
+        q2.push(val);
+
+        while (!q2.empty()) {
+            q1.push(q2.front());
+            q2.pop();
+        }
+        return val;
+    }
+};
