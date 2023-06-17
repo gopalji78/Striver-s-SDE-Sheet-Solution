@@ -1,0 +1,46 @@
+Problem Link: https://www.codingninjas.com/codestudio/problems/stack-implementation-using-array_8230854?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+#include <bits/stdc++.h> 
+// Stack class.
+class Stack {
+    private:
+    int *arr;
+    int size;
+    int front;
+public:
+    
+    Stack(int capacity) {
+        arr = new int[capacity];
+        size = capacity;
+        front = -1;
+    }
+
+    void push(int num) {
+        if (front > size) {
+            return;
+        }
+        front++;
+        arr[front] = num;
+    }
+
+    int pop() {
+        if (front < 0) return -1;
+        int val = arr[front];
+        front--;
+        return val;
+    }
+    
+    int top() {
+        if (front == -1) return -1;
+        return arr[front];
+    }
+    
+    int isEmpty() {
+        return front < 0;
+    }
+    
+    int isFull() {
+        return front == size;
+    }
+    
+};
