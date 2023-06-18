@@ -1,0 +1,36 @@
+Problem Link: https://www.codingninjas.com/codestudio/problems/diameter-of-binary-tree_8230762?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+/************************************************************
+
+    Following is the TreeNode class structure
+
+    template <typename T>
+    class TreeNode {
+       public:
+        T data;
+        TreeNode<T> *left;
+        TreeNode<T> *right;
+
+        TreeNode(T data) {
+            this->data = data;
+            left = NULL;
+            right = NULL;
+        }
+    };
+
+************************************************************/
+pair<int, int> solver(TreeNode<int>* root) {
+    if (root == NULL) return {0, 0};
+
+    auto left = solver(root->left);
+    auto right = solver(root->right);
+
+    int height = max(left.second, right.second) +1;
+    int dia = max(left.second + right.second + 1, max(left.first, right.first));
+    return {dia, height};
+}
+int diameterOfBinaryTree(TreeNode<int> *root)
+{
+	auto it = solver(root);
+    return it.first-1;
+}
