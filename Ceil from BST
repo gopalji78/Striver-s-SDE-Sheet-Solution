@@ -1,0 +1,44 @@
+Problem Link: https://www.codingninjas.com/codestudio/problems/ceil-from-bst_8230754?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+#include <bits/stdc++.h> 
+/************************************************************
+
+    Following is the TreeNode class structure:
+
+    class BinaryTreeNode {
+    public:
+        T data;
+        BinaryTreeNode<T> *left;
+        BinaryTreeNode<T> *right;
+        
+        BinaryTreeNode(T data) {
+            this->data = data;
+            left = NULL;
+            right = NULL;
+        }
+        
+        ~BinaryTreeNode() {
+            if (left) {
+              delete left;
+            }
+            if (right) {
+              delete right;
+            }
+        }
+    };
+
+************************************************************/
+
+int findCeil(BinaryTreeNode<int> *root, int x){
+    int ceil = -1;
+    BinaryTreeNode<int>* temp = root;
+    while (temp != NULL) {
+        if (temp->data == x) return temp->data;
+        if (x>temp->data) temp = temp->right;
+        else {
+            ceil = temp->data;
+            temp = temp->left;
+        }
+    }
+    return ceil;
+}
