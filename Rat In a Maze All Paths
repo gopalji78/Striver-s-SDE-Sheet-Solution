@@ -1,0 +1,40 @@
+Problem Link: https://www.codingninjas.com/studio/problems/rat-in-a-maze-all-paths_8230705?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+#include <bits/stdc++.h> 
+int dx[] = {1, -1, 0, 0};
+int dy[] = {0, 0, 1, -1};
+void solver (int row, int col, int n, vector<vector<int>> maze, vector<vector<int>>& path,
+              vector<vector<int>>& ans) {
+                if(row == n-1 && col == n-1) {
+                  vector<int> vis;
+                  for (int i=0; i<n; i++) {
+                    for (int j=0; j<n; j++) {
+                      vis.push_back(path[i][j]);
+                    }
+                  }
+                  ans.push_back(vis);
+                }
+
+                for (int i=0; i<4; i++) {
+                  int new_r = row+dx[i];
+                  int new_c = col+dy[i];
+                  if (new_r>=0 && new_r<n && new_c>=0 && new_c<n && !path[new_r][new_c] 
+                  && maze[new_r][new_c] == 1) {
+                    path[new_r][new_c] = 1;
+                    solver(new_r, new_c, n, maze, path, ans);
+                    path[new_r][new_c] = 0;
+                  }
+                }
+
+              
+              }
+
+
+vector<vector<int> > ratInAMaze(vector<vector<int> > &maze, int n){
+    vector<vector<int>> ans;
+    vector<vector<int>> path(n, vector<int>(n, 0));
+    if(maze[0][0] == 0) return ans;
+    path[0][0] = 1;
+    solver(0, 0, n, maze, path, ans);
+    return ans;
+}
