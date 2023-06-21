@@ -1,0 +1,20 @@
+Problem Link: https://www.codingninjas.com/studio/problems/day-13-print-permutations-string_8230703?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+#include <bits/stdc++.h> 
+void solver (int index, string& s, vector<string>& ans) {
+    if (index == s.size()) {
+        ans.push_back(s);
+        return;
+    }
+
+    for (int i=index; i<s.size(); i++) {
+        swap(s[index], s[i]);
+        solver(index+1, s, ans);
+        swap(s[index], s[i]);
+    }
+}
+vector<string> findPermutations(string &s) {
+    vector<string> ans;
+    solver(0, s, ans);
+    return ans;
+}
