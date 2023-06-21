@@ -1,0 +1,46 @@
+Problem Link: https://www.codingninjas.com/studio/problems/n-queens_8230707?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+bool isPossible(int n, int row, int col, vector<int> left, vector<int> upperDia, vector<int> lowerDia) {
+    if (left[row] == 0 && upperDia[row+col] == 0 && lowerDia[n-1+row-col] == 0) return true;
+    return false;
+}
+
+void solver(int col, vector<vector<int>>& board, vector<int>& left, vector<int>& upperDia, 
+            vector<int>& lowerDia, vector<vector<int>>& ans) {
+        
+        int n = board.size();
+        if (col == board.size()) {
+            vector<int> config;
+            for (int i=0; i<board.size(); i++) {
+                for (int j=0; j<board.size(); j++){
+                    config.push_back(board[i][j]);
+                }
+            }
+            ans.push_back(config);
+        }
+
+
+        for (int row = 0; row<board.size(); row++) {
+            if (isPossible(board.size(), row, col, left, upperDia, lowerDia)) {
+                board[row][col] = 1;
+                left[row] = 1;
+                upperDia[row+col] = 1;
+                lowerDia[n-1 + row-col] = 1;
+                solver(col+1, board, left, upperDia, lowerDia, ans);
+                board[row][col] = 0;
+                left[row] = 0;
+                upperDia[row+col] = 0;
+                lowerDia[n-1+row-col] = 0;
+
+            }
+        }
+
+}
+
+vector<vector<int>> solveNQueens(int n) {
+    vector<vector<int>> board(n, vector<int>(n, 0));
+    vector<int> left(n, 0), upperDia(2*n-1, 0), lowerDia(2*n-1, 0);
+    vector<vector<int>> ans;
+    solver(0, board, left, upperDia, lowerDia, ans);
+    return ans;
+}
