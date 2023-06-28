@@ -1,0 +1,47 @@
+Problem Link: https://www.codingninjas.com/studio/problems/construct-binary-tree-from-inorder-and-postorder-traversal_8230837?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+/************************************************************
+   
+   Following is the TreeNode class structure
+   
+   class TreeNode<T>
+   { 
+   public:
+        T data; 
+        TreeNode<T> *left;
+        TreeNode<T> *right;
+   
+        TreeNode(T data) 
+  		{ 
+            this -> data = data; 
+            left = NULL; 
+            right = NULL; 
+        }
+   };
+   
+   
+ ************************************************************/
+int findIndex(vector<int>& inOrder, int key) {
+     for (int i=0; i<inOrder.size(); i++) {
+          if (inOrder[i] == key) return i;
+     }
+     return -1;
+}
+TreeNode<int>* helper(vector<int>& postOrder, int &pIndex, vector<int>& inOrder, int inSTrt, int inEnd) {
+     if (pIndex> inOrder.size() || inSTrt > inEnd) return NULL;
+
+     int key = postOrder[pIndex--];
+     TreeNode<int>* root = new TreeNode<int>(key);
+     int inIndex = findIndex(inOrder, key);
+     // int leftSubTreeLen = inIndex-inSTrt;
+
+     root->right = helper(postOrder, pIndex, inOrder, inIndex+1, inEnd);
+     root->left = helper(postOrder, pIndex, inOrder, inSTrt, inIndex-1);
+     return root;
+} 
+TreeNode<int>* getTreeFromPostorderAndInorder(vector<int>& postOrder, vector<int>& inOrder) 
+{
+     int n = inOrder.size();
+     int pIndex = n-1;
+	return helper(postOrder, pIndex, inOrder, 0, n-1);
+}
