@@ -1,0 +1,23 @@
+Problem Link: https://www.codingninjas.com/studio/problems/count-distinct-element-in-every-k-size-window_8230749?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+#include <bits/stdc++.h> 
+vector<int> countDistinctElements(vector<int> &arr, int k) 
+{
+    vector<int> res;
+    unordered_map<int, int> freq;
+    for (int i=0; i<k; i++) freq[arr[i]]++;
+
+    for (int i=k; i<arr.size(); i++) {
+        res.push_back(freq.size());
+
+        freq[arr[i-k]]--;
+        if (freq[arr[i-k]] == 0) freq.erase(arr[i-k]);
+
+        freq[arr[i]]++;
+    }
+
+    res.push_back(freq.size());
+
+    return res;
+	
+}
