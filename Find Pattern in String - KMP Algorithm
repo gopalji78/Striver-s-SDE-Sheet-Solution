@@ -1,0 +1,12 @@
+Problem Link: https://www.codingninjas.com/studio/problems/find-pattern-in-string-kmp-algorithm_8230819?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+
+#include <bits/stdc++.h> 
+bool findPattern(string p, string s)
+{
+    int n = s.size(), m = p.size();
+    for (int i=0; i<=n-m; i++) {
+        if (s.substr(i, m) == p) return true;
+    }
+    return false;
+}
